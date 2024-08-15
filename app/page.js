@@ -35,10 +35,10 @@ export default function Home() {
         <Button variant="contained" color="primary" sx={{mt: 2}}>Get Started</Button>
       </Box>
       <Box sx={{my: 6}}>
-        <Typography variant="h4" components="h2">
+        <Typography variant="h4" components="h2" textAlign="center" gutterBottom>
           Features
         </Typography>
-        <Grid contained spacing={4}>
+        <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6">Magic Flashcards</Typography>
             <Typography>
@@ -46,8 +46,6 @@ export default function Home() {
               Input your text and see the magic of our app! Study faster and effectively from our flashcards!
             </Typography>
           </Grid>
-        </Grid>
-        <Grid contained spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6">Smart Flashcards</Typography>
             <Typography>
@@ -55,14 +53,37 @@ export default function Home() {
               Our intelligent AI turns your text into keywords, perfect for studying 
             </Typography>
           </Grid>
-        </Grid>
-        <Grid contained spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6">Flashcards Everywhere</Typography>
             <Typography>
               {' '}
               Access your flashcards anywhere, anytime, on any device!
             </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{my: 6}}>
+        <Typography variant="h4" components="h2" textAlign="center" gutterBottom>
+          Pricing
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6} textAlign="center">
+            <Typography variant="h6">Basic Plan</Typography>
+            <Typography variant="h6">$5 / month</Typography>
+            <Typography gutterBottom>
+              {' '}
+              Limited flashcards and storage
+            </Typography>
+            <Button variant="contained">Choose Basic</Button>
+          </Grid>
+          <Grid item xs={12} md={6} textAlign="center">
+            <Typography variant="h6">Pro Plan</Typography>
+            <Typography variant="h6">$15 / month</Typography>
+            <Typography>
+              {' '}
+              Unlimited flashcard features and storage with primary support 
+            </Typography>
+            <Button variant="contained">Choose Pro</Button>
           </Grid>
         </Grid>
       </Box>
