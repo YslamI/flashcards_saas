@@ -79,7 +79,7 @@ export default function Home() {
           <Grid item xs={12} md={6} textAlign="center">
             <Typography variant="h6">Pro Plan</Typography>
             <Typography variant="h6">$15 / month</Typography>
-            <Typography>
+            <Typography gutterBottom>
               {' '}
               Unlimited flashcard features and storage with primary support 
             </Typography>
