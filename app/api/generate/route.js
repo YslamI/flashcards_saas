@@ -9,8 +9,8 @@ You should return in the following JSON format:
 {
   "flashcards":[
     {
-      "front": "Front of the card",
-      "back": "Back of the card"
+      "front": str,
+      "back": str
     }
   ]
 }

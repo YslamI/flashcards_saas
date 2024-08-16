@@ -119,7 +119,9 @@ export default function Generate() {
                                                 width: '100%',
                                                 height: '200px',
                                                 boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
-                                                trsansform: flipped[index]? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                                transform: flipped[index]
+                                                    ? 'rotateY(180deg)' 
+                                                    : 'rotateY(0deg)',
                                             },
                                             '& > div > div': {
                                                 position: 'absolute',
@@ -133,7 +135,7 @@ export default function Generate() {
                                                 boxSizing: 'border-box'
                                             },
                                             '& > div > div:nth-of-type(2)': {
-                                                trsansform: 'rotateY(180deg)',
+                                                transform: 'rotateY(180deg)',
                                             },
                                         }}>
                                             <div>
