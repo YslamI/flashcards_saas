@@ -4,8 +4,10 @@ import getStripe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import Head from "next/head";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
+  const {isLoaded, isSignedIn, user} = useUser()
   
   const handleSubmit = async ()=>{
     const checkoutSession = await fetch('/api/checkout_session', {
@@ -41,13 +43,19 @@ export default function Home() {
       <AppBar position="static" sx={{width: "100%"}}>
         <Toolbar color="cyan">
           <Typography variant="h6" width="100%" style={{flexGrow: 1}}>Flashcard SaaS</Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in">Login</Button>
-            <Button color="inherit" href="sign-up" width="11.2em">Sign Up</Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          {!isSignedIn ? (
+            <SignedOut>
+              <Button color="inherit" href="/sign-in">Login</Button>
+              <Button color="inherit" href="sign-up" width="11.2em">Sign Up</Button>
+            </SignedOut>
+
+          ) : (
+              <><SignedIn>
+                <UserButton />
+              </SignedIn>
+              {' '}
+              <Button sx={{color: "inherit", marginLeft: "15px"}} href="/generate_flashcards">Generate Flashcards</Button></>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -58,7 +66,11 @@ export default function Home() {
           {' '}
           Create flashcards in just one click
         </Typography>
-        <Button variant="contained" color="primary" href="/sign-up" sx={{mt: 2}}>Get Started</Button>
+        {isSignedIn ? (
+          <></>
+        ) : (
+          <Button variant="contained" color="primary" href="/sign-up" sx={{mt: 2}}>Get Started</Button>
+        )}
       </Box>
       <Box sx={{my: 6}}>
         <Typography variant="h4" components="h2" textAlign="center" gutterBottom>
@@ -100,7 +112,11 @@ export default function Home() {
               {' '}
               Limited flashcards and storage
             </Typography>
-            <Button variant="contained">Choose Basic</Button>
+            {isSignedIn ? (
+          <></>
+        ) : (
+           <Button variant="contained">Choose Basic</Button>
+        )}
           </Grid>
           <Grid item xs={12} md={6} textAlign="center">
             <Typography variant="h6">Pro Plan</Typography>
