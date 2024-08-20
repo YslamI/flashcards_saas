@@ -8,7 +8,7 @@ import Head from "next/head";
 export default function Home() {
   
   const handleSubmit = async ()=>{
-    const checkoutSession = await fetch('/api/checkout_seesion', {
+    const checkoutSession = await fetch('/api/checkout_session', {
       method: 'POST',
       headers: {
         origin: 'http://localhost:3000',
