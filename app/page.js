@@ -41,24 +41,30 @@ export default function Home() {
         <meta name="description" content="Create flashcards to easily and effectively study from your text" />
       </Head>
 
-      <AppBar position="static" sx={{ bgcolor: 'primary.main' }}>
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Flashcard SaaS
-          </Typography>
-          {!isSignedIn ? (
-            <SignedOut>
-              <Button color="inherit" href="/sign-in">Login</Button>
-              <Button color="inherit" href="/sign-up">Sign Up</Button>
-            </SignedOut>
-          ) : (
-            <>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-              <Button sx={{ color: "inherit", ml: 2 }} href="/generate_flashcards">Generate Flashcards</Button>
-            </>
-          )}
+      <AppBar position="static" sx={{ bgcolor: 'primary.main', width: '100%' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <Box sx={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+            <Typography variant="h6">Flashcard SaaS</Typography>
+          </Box>
+
+          <Box sx={{ flex: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {isSignedIn && (
+              <Button sx={{ color: "inherit" }} href="/generate_flashcards">
+                Generate Flashcards
+              </Button>
+            )}
+          </Box>
+
+          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            {!isSignedIn ? (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Button color="inherit" href="/sign-in">Login</Button>
+                <Button color="inherit" href="/sign-up">Sign Up</Button>
+              </Box>
+            ) : (
+              <UserButton />
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
 
@@ -80,7 +86,7 @@ export default function Home() {
         <Typography variant="h4" gutterBottom textAlign="center">
           Features
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={8}>
           <Grid item xs={12} md={4}>
             <Box sx={{ textAlign: 'center', p: 3, borderRadius: 2, boxShadow: 3 }}>
               <Typography variant="h6">Magic Flashcards</Typography>
@@ -93,7 +99,7 @@ export default function Home() {
             <Box sx={{ textAlign: 'center', p: 3, borderRadius: 2, boxShadow: 3 }}>
               <Typography variant="h6">Smart Flashcards</Typography>
               <Typography>
-                Our intelligent AI turns your text into keywords, perfect for studying.
+                Our intelligent AI turns your text into keywords, perfect for studying and practicing.
               </Typography>
             </Box>
           </Grid>
@@ -101,7 +107,7 @@ export default function Home() {
             <Box sx={{ textAlign: 'center', p: 3, borderRadius: 2, boxShadow: 3 }}>
               <Typography variant="h6">Flashcards Everywhere</Typography>
               <Typography>
-                Access your flashcards anywhere, anytime, on any device!
+                Access your flashcards anywhere, anytime, on any device! Easy to use, and keeps up to date.
               </Typography>
             </Box>
           </Grid>
