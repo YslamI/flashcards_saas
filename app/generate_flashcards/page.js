@@ -1,11 +1,13 @@
 
 'use client'
 import { useUser } from "@clerk/nextjs"
+import { db } from "@/firebase"
 import { Button, Card, CardActionArea, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography } from "@mui/material"
 import { Container, Box } from "@mui/system"
-import { collection, DocumentReference, getDoc, writeBatch } from "firebase/firestore"
+import { DocumentReference, getDoc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { doc, collection, setDoc, writeBatch, useDocRef } from "firebase/firestore"
 
 export default function Generate() {
     const {isLoaded, isSignedIn, user } = useUser()
@@ -40,40 +42,41 @@ export default function Generate() {
     }
 
     const saveFlashcards = async () => {
-        if(!name) {
-            alert('Please enter a name')
-            return
+        if (!name) {
+            alert('Please enter a name');
+            return;
         }
-
-        const batch = writeBatch(db)
-        const userDocRef = doc(collection(db, 'users'), user.id)
-        const docSnap = await getDoc(userDocRef)
-
-        if(docSnap.exists()){
-            const collections = docSnap.data().flashcards || []
-            if(collections.find((f) => f.name === name)){
-                alert("Flashcard collection with this name already exists")
-                return
+    
+        const batch = writeBatch(db);
+        const userDocRef = doc(db, 'users', user.id);
+        const docSnap = await getDoc(userDocRef);
+    
+        if (docSnap.exists()) {
+            const collections = docSnap.data().flashcards || [];
+            if (collections.find((f) => f.name === name)) {
+                alert("Flashcard collection with this name already exists");
+                return;
+            } else {
+                collections.push({ name });
+                batch.set(userDocRef, { flashcards: collections }, { merge: true });
             }
-            else{
-                collections.push({name})
-                batch.set(userDocRef, {flashcards: collections}, {merge: true})
-            }
+        } else {
+            batch.set(userDocRef, { flashcards: [{ name }] });
         }
-        else{
-            batch.set(userDocRef, {flashcards: [{name}]})
-        }
-
-        const colRef = collection(useDocRef, name)
+    
+        // Create a new collection for the user's flashcards with the given name
+        const colRef = collection(userDocRef, name);
+    
         flashcards.forEach((flashcard) => {
-            const cardDocRef = doc(colRef)
-            batch.set(cardDocRef, flashcard)
-        })
-
-        await batch.commit()
-        handleClose()
-        router.push('/flashcards')
+            const cardDocRef = doc(colRef);  // Create a new document reference
+            batch.set(cardDocRef, flashcard);
+        });
+    
+        await batch.commit();
+        handleClose();
+        router.push('/flashcards');
     }
+    
 
     return(
         <Container maxWidth="max">
@@ -105,7 +108,7 @@ export default function Generate() {
                     <Typography variant="h5">Flashcard Preview</Typography>
                     <Grid container spacing={3}>
                         {flashcards.map((flashcard, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                             <Card>
                                 <CardActionArea onClick={() => {
                                     handleCardClick(index)
