@@ -39,7 +39,7 @@ const ResultPage = ()=>{
 
     if (loading){
         return(
-            <Container maxWidth = "vw" sx={{
+            <Container maxWidth = "100vw" sx={{
                 textAlign: 'center', mt:4
             }}>
                 <CircularProgress />
@@ -50,7 +50,7 @@ const ResultPage = ()=>{
 
     if (error){
         return(
-            <Container maxWidth = "vw" sx={{
+            <Container maxWidth = "100vw" sx={{
                 textAlign: 'center', mt:4
             }}>
                 <Typography variant="h6">{error}</Typography>
@@ -59,7 +59,7 @@ const ResultPage = ()=>{
     }
 
     return (
-        <Container maxWidth = "vw" sx={{
+        <Container maxWidth = "100vw" sx={{
             textAlign: 'center', mt:4
         }}>
             {

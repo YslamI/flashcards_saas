@@ -58,7 +58,7 @@ export default function Home() {
           {' '}
           Create flashcards in just one click
         </Typography>
-        <Button variant="contained" color="primary" sx={{mt: 2}}>Get Started</Button>
+        <Button variant="contained" color="primary" href="/sign-up" sx={{mt: 2}}>Get Started</Button>
       </Box>
       <Box sx={{my: 6}}>
         <Typography variant="h4" components="h2" textAlign="center" gutterBottom>
@@ -95,7 +95,7 @@ export default function Home() {
         <Grid container spacing={4}>
           <Grid item xs={12} md={6} textAlign="center">
             <Typography variant="h6">Basic Plan</Typography>
-            <Typography variant="h6">$5 / month</Typography>
+            <Typography variant="h6">Free</Typography>
             <Typography gutterBottom>
               {' '}
               Limited flashcards and storage
